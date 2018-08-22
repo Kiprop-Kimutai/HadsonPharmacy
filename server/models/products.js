@@ -11,7 +11,7 @@ var counterSchema = new Schema({
 var products_counter = mongoose.model('products_counter',counterSchema);
 
 var productsSchema = new Schema({
-    id:{type:Number,unique:true},
+    product_id:{type:Number,unique:true},
     product_code:{type:String,required:true},
     gen_name:{type:String},
     product_name:{type:String},
@@ -41,7 +41,7 @@ productsSchema.pre('save',function(next){
     var doc = this;
     console.log(">>>");
     products_counter.findByIdAndUpdate({_id:'entityId'},{$inc:{seq:1}},{new:true,upsert:true}).then(function(count){
-        doc.id = count.seq;
+        doc.product_id = count.seq;
         var date = new Date();
 
         if(!doc.created_at){
