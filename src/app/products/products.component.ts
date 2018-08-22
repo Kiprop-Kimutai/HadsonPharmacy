@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit{
     ngOnInit(){
         //this.fetchAllProducts();
         this.dataSource = new MatTableDataSource(this.fetchAllProducts());
-        this.displayedColumns = ['product_id','product_name','gen_name','product_code','supplier','created_at','expiry_date','ordering_price','price','original_quantity','onhand_qty','cost'];
+        this.displayedColumns = ['product_id','product_name','gen_name','product_code','supplier','created_at','expiry_date','ordering_price','selling_price','original_quantity','onhand_qty','cost'];
         this.pageSize = 10;
     }
 }
