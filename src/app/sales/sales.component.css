@@ -1,0 +1,25 @@
+.body{
+    min-height: 100vh;
+}
+table{
+    width:105%;
+}
+mat-card{
+    width:100%
+}
+
+.search-icon{
+    background-image: url(../../assets/icons/caret_down.png);
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 50%;
+}
+@media only screen and(max-device-width:450px){
+    table{
+        width:105%;
+    }
+    mat-card{
+        
+    }
+   
+}
