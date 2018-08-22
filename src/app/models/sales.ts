@@ -1,4 +1,4 @@
-export class sales{
+export class Sales{
     constructor(
         public id:number,
         public invoice_number:string,
