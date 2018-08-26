@@ -4,6 +4,7 @@ export const MENUS = [
       new Menu('dashboard','Dashboard','dashboard','link'),
       new Menu('users','Users','users','link'),
       new Menu('products','Products','products','link'),
+      new Menu('purchase_order','Purchase Order','dashboard','link'),
       new Menu('sales','Sales','sales1','link'),
       new Menu('customers','Customers','customers','link'),
       new Menu('suppliers','Suppliers','sup','link'),
