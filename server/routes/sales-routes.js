@@ -18,7 +18,7 @@ app.save('/saveproduct', (req,res,next) =>{
     new Promise(function (resolve,reject){
         for(var i =0;i<req.body.data.length;i++){
             var sales = new Sales({
-                invoice_number:req.body.data[i].invoice_number,
+                receipt_number:req.body.data[i].receipt_number,
                 cashier:req.body.data[i].cashier,
                 amount:req.body.data[i].amount,
                 profit:req.body.data[i].profit,
