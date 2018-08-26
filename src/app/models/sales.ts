@@ -1,7 +1,7 @@
 export class Sales{
     constructor(
         public id:number,
-        public invoice_number:string,
+        public receipt_number:string,
         public cashier:string,
         public amount:Number,
         public profit:Number,
