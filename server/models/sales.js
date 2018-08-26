@@ -11,7 +11,7 @@ var sales_counter = mongoose.model('sales_counter',counterSchema);
 
 var salesChema = new Schema({
     id:{type:Number,unique:true},
-    invoice_number:{type:String,unique:true},
+    receipt_number:{type:String,unique:true},
     cashier:{type:String},
     amount:{type:Number},
     profit:{type:Number},
