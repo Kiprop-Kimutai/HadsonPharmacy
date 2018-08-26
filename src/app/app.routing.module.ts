@@ -7,6 +7,7 @@ import {DeviceListComponent} from './device/device-list.component';
 import {DeviceFirmwareComponent} from './device_firmware/device_firmware';
 import {DeviceComponent} from './device/device.component';
 import {ProductsComponent} from './products/products.component';
+import {LpoComponent} from './lpo/lpo.component';
 import {SalesComponent} from './sales/sales.component';
 import {CustomersComponent} from './customers/customers.component';
 import {SuppliersComponent} from './suppliers/suppliers.component';
@@ -76,6 +77,10 @@ const appRoutes:Routes = [
       {
         path:'dashboard',
         component:DashboardComponent
+      },
+      {
+        path:'purchase_order',
+        component:LpoComponent
       },
       {
         path:'products',
