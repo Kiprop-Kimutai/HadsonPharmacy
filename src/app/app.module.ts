@@ -20,7 +20,9 @@ import {DeviceComponent} from './device/device.component';
 import {DeviceFirmwareComponent} from './device_firmware/device_firmware';
 import {ProductsComponent} from './products/products.component';
 import {ProductDialog} from './products/products.dialog';
-import {SalesComponent} from './sales/sales.component';
+import {LpoComponent} from './lpo/lpo.component';
+import {SalesComponent,SalesOrderComponent1} from './sales/sales.component';
+import {SalesOrderComponent} from './sales/salesorder.component';
 import {SalesDialog} from './sales/sales-dialog';
 import {CustomersComponent} from './customers/customers.component';
 import {CustomerDialog} from './customers/customer.dialog';
@@ -45,9 +47,10 @@ import {HttpClientModule} from '@angular/common/http';
     NavListComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    DashboardComponent,DeviceFirmwareComponent,ProductsComponent,SalesComponent,SalesDialog,ProductDialog,
+    DashboardComponent,DeviceFirmwareComponent,ProductsComponent,SalesComponent,SalesOrderComponent,SalesDialog,ProductDialog,
     PageDirective,DeviceDialog,DeviceComponent,DeviceListComponent,FilterDevicess,PageNotFoundComponent,
-    CustomersComponent,CustomerDialog,SupplierDialogComponent,SuppliersComponent,SalesReportComponent,StockReportComponent
+    CustomersComponent,CustomerDialog,SupplierDialogComponent,SuppliersComponent,SalesReportComponent,StockReportComponent,
+    SalesOrderComponent1,LpoComponent
   ],
   imports: [
     BrowserModule,CommonModule,BrowserAnimationsModule,AppRoutingModule,ReactiveFormsModule,FormsModule,MaterialModule,
