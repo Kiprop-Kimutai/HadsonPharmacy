@@ -10,6 +10,7 @@ var counter_schema = mongoose.model('counter_schema',counterSchema);
 
 var salesOrderSchema = new Schema({
     id:{type:Number,unique:true},
+    receipt_number:{type:String,unique:true},
     invoice:{type:String},
     product:{type:String},
     quantity:{type:Number},
@@ -28,6 +29,7 @@ salesOrderSchema.pre('save',function(next){
     counter_schema.findByIdAndUpdate({_id:'entityId'},{$inc:{seq:1}},{new:true,upsert:true}).then(function(count){
         doc.id = count.seq;
         var date = new Date();
+        doc.receipt_number = count.seq + date;
 
         if(!doc.created_at){
             doc.created_at = date;
