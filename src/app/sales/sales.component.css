@@ -4,6 +4,9 @@
 table{
     width:105%;
 }
+tr:hover{
+    background-color: rgba(243, 237, 237, 0.856);
+  }
 mat-card{
     width:100%
 }
