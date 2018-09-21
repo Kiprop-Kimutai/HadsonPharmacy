@@ -6,11 +6,15 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {DeviceListComponent} from './device/device-list.component';
 import {DeviceFirmwareComponent} from './device_firmware/device_firmware';
 import {DeviceComponent} from './device/device.component';
-import {ProductsComponent} from './products/products.component';
-import {LpoComponent} from './lpo/lpo.component';
+import {ProductsComponent} from './stock/products/products.component';
+import {ProductCatalogueComponent} from './stock/product-catalogue/product-catalogue.component';
+import {LpoListComponent} from './stock/lpo-list/lpo-list.component';
+import {LpoComponent} from './stock/lpo/lpo.component';
+import {LpoDetailComponent} from './stock/lpo-list/lpo-detail.component';
+import {WedComponent} from './stock/lpo/wed.component';
 import {SalesComponent} from './sales/sales.component';
 import {CustomersComponent} from './customers/customers.component';
-import {SuppliersComponent} from './suppliers/suppliers.component';
+import {SuppliersComponent} from './stock/suppliers/suppliers.component';
 import {SalesReportComponent} from './reports/salesreport/salesreport.component';
 import {StockReportComponent} from './reports/stockreport/stockreport.component';
 import {PageNotFoundComponent} from './page-not-found.component';
@@ -79,13 +83,43 @@ const appRoutes:Routes = [
         component:DashboardComponent
       },
       {
+        path:'stock-management',
+        children:[
+          {
+            path:'purchase_order',
+            component:LpoComponent
+          },
+          {
+            path:'lpolist',
+            component:LpoListComponent
+          },
+          {
+            path:'lpolist/:id',
+            component:LpoDetailComponent
+          },
+          {
+          path:'products',
+          component:ProductsComponent
+          },
+          {
+            path:'suppliers',
+            component:SuppliersComponent
+          },
+          {
+            path:'catalogue',
+            component:ProductCatalogueComponent
+          }
+        ]
+      },
+
+      /*{
         path:'purchase_order',
         component:LpoComponent
       },
       {
         path:'products',
         component:ProductsComponent
-      },
+      },*/
       {
         path:'sales',
         component:SalesComponent
