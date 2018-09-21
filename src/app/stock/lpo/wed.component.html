@@ -1,0 +1,17 @@
+<div>
+    <form [formGroup] = "orderForm">
+        <div>
+            <input formControlName  = "customerName" /><br>
+            <input formControlName = "email"/><br>
+        </div>
+        <button (click) = "addItem()">add</button>
+        <div formArrayName = "items" *ngFor = "let item of orderForm.get('items').controls;let i = index" style = "margin-top:10px;">
+            <div [formGroupName] = "i">
+                <input formControlName = "name"/><br>
+                <input formControlName = "description"/><br>
+                <input formControlName = "price"/><br>
+            </div>
+        </div>
+    </form>
+</div>
+<div>{{orderValue}}</div>

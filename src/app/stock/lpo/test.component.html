@@ -1,0 +1,132 @@
+<form>
+    <mat-card class = "header-mat-card">
+        <div>
+            <!--<button mat-icon-button fxFlexOffset = "90%" style = "background-color: teal" (click) = "orderItem()">add</button>-->
+       </div>
+            <table mat-table [dataSource]="products" class="mat-elevation-z8">
+                  
+                    <!-- product name Column -->
+                    <ng-container matColumnDef="product_name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let product" > {{product.product_name}} </td>
+                    </ng-container>
+                
+                    <!-- generic name Column -->
+                    <ng-container matColumnDef="gen_name">
+                      <th mat-header-cell *matHeaderCellDef> Generic Name </th>
+                      <td mat-cell *matCellDef="let product" > {{product.gen_name}} </td>
+                    </ng-container>
+                  
+                    <!-- product code/description Column -->
+                    <ng-container matColumnDef="product_code">
+                      <th mat-header-cell *matHeaderCellDef>Description</th>
+                      <td mat-cell *matCellDef="let product" > {{product.product_code}} </td>
+                    </ng-container>
+
+                    <!-- units Column -->
+                    <ng-container matColumnDef="units">
+                        <th mat-header-cell *matHeaderCellDef>Units</th>
+                        <td mat-cell *matCellDef="let product;let i = index;" >
+                          <!--<input type = "number" formControlName = "units" value = "{{product.units}}" [(ngModel)] = "product.units" name = "units"/>-->
+                          <input type = "number"   placeholder="product.units" value = "product.units"/>
+                         </td>
+                    </ng-container>
+                    <!-- unit quantity Column -->
+                    <ng-container matColumnDef="unit_quantity">
+                        <th mat-header-cell *matHeaderCellDef>Unit quantity</th>
+                        <td mat-cell *matCellDef="let product;" >
+                          <!--<input type = "number" formControlName = "unit_quantity" value = "{{product.unit_quantity}}" (mouseleave) = "setFormValues()"/>-->
+                          <input type = "number"   (mouseleave) = "setFormValues()"/>
+
+                        </td>
+                    </ng-container>
+                  
+                    <!-- Original quantity Column -->
+                    <ng-container matColumnDef="original_quantity">
+                        <th mat-header-cell *matHeaderCellDef>Ordered qty</th>
+                        <td mat-cell *matCellDef="let product" >
+                           <!--<input matInput formControlName = "original_quantity"/>-->
+                           <input matInput/>
+                          </td>
+                    </ng-container>
+
+                    <!-- unit price quantity Column -->
+                    <ng-container matColumnDef="unit_price">
+                        <th mat-header-cell *matHeaderCellDef>unit price</th>
+                        <td mat-cell *matCellDef="let product" >
+                            <!--<input type = "number" formControlName = "unit_price" value = "{{product.unit_price}}" (mouseleave) = "setFormValues()"/>-->
+                            <input type = "number"  (mouseleave) = "setFormValues()"/>
+                          </td>
+                    </ng-container>
+
+                    <!-- actual cost Column -->
+                    <ng-container matColumnDef="actual_cost">
+                        <th mat-header-cell *matHeaderCellDef>actual cost</th>
+                        <td mat-cell *matCellDef="let product" >
+                            <!--<input matInput formControlName = "actual_cost" value = "{{product.actual_cost}}"/>-->
+                            <input matInput  />
+                          </td>
+                    </ng-container>
+                    <!-- discount Column -->
+                    <ng-container matColumnDef="discount">
+                        <th mat-header-cell *matHeaderCellDef>discount</th>
+                        <td mat-cell *matCellDef="let product" >
+                            <!--<input type = "number" formControlName = "discount" value = "{{product.discount}}" (mouseleave) = "setFormValues()"/>-->
+                            <input type = "number"  (mouseleave) = "setFormValues()"/>
+                          </td>
+                    </ng-container>
+                    <!-- unit discount Column -->
+                    <ng-container matColumnDef="unit_discount">
+                        <th mat-header-cell *matHeaderCellDef>unit discount</th>
+                        <td mat-cell *matCellDef="let product" >
+                            <!--<input matInput formControlName = "unit_discount" value = "{{product.unit_discount}}"/>-->
+                            <input matInput [(ngModel)] = "product.unit_discount" name = "unit_discount"/>
+                          </td>
+                    </ng-container>
+                    <!--cost column-->
+                    <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef>cost</th>
+                        <td mat-cell *matCellDef="let product" >
+                            <!--<input matInput formControlName = "cost" value = "{{product.cost}}"/>-->
+                            <input matInput [(ngModel)] = "product.cost" name = "cost"/>
+                          </td>
+                    </ng-container>
+
+                    <!-- expiry date Column -->
+                    <ng-container matColumnDef="expiry_date">
+                      <th mat-header-cell *matHeaderCellDef>Expiry Date</th>
+                      <td mat-cell *matCellDef="let product" > {{product.expiry_date}} </td>
+                    </ng-container>
+                
+                    <!-- ordering price Column -->
+                    <ng-container matColumnDef="ordering_price">
+                      <th mat-header-cell *matHeaderCellDef>Odering Price</th>
+                      <td mat-cell *matCellDef="let product" >
+                        <!--<input matInput formControlName = "ordering_price" value = "{{product.ordering_price}}"/>-->
+                        <input matInput [(ngModel)] = "product.ordering_price" name = "ordering_price"/>
+                       </td>
+                    </ng-container>
+                
+                    <!-- selling price Column -->
+                    <ng-container matColumnDef="selling_price">
+                      <th mat-header-cell *matHeaderCellDef>Selling Price</th>
+                      <td mat-cell *matCellDef="let product" > 
+                        <!--<input type = "number" formControlName = "selling_price" value = "{{product.selling_price}}" (mouseleave) = "setFormValues()"/>-->
+                        <input type = "number" [(ngModel)] = "product.selling_price" name = "selling_price" (mouseleave) = "setFormValues()"/>
+                      </td>
+                    </ng-container>
+            
+                    <!-- profit of stock Column -->
+                    <ng-container matColumnDef="profit">
+                      <th mat-header-cell *matHeaderCellDef>profit</th>
+                      <td mat-cell *matCellDef="let product" >
+                        <!--<input matInput formControlName = "profit" value = "{{product.profit}}"/>-->
+                        <input matInput [(ngModel)] = "product.profit" name = "product.profit"/>
+                      </td>
+                    </ng-container>
+                  
+                    <tr [hidden] = "true" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+    </mat-card>
+  </form>

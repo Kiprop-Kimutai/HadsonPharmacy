@@ -1,0 +1,56 @@
+.body{
+    height: auto;
+    /*min-height: 100vh;*/
+}
+.header-mat-card{
+    margin: 10px;
+    width:130%;
+   
+}
+.add-button{
+    background-color: teal;
+    margin:10px;
+}
+.required::after{
+    content:'*';
+    color: red;
+}
+table{
+    width: 100%;
+}
+.productsList{
+    width:100%;
+    margin:5px;
+}
+input{
+    width:7%;
+}
+label{
+    width:30%;
+    background-color: teal;
+}
+td{
+    font-size: 0.7em;
+}
+
+@media only screen and (max-device-width:901px) and (min-device-width:701px){
+    .header-mat-card{
+        width:150%;
+    }
+}
+@media only screen and (max-device-width:700px) and (min-device-width:501px){
+    .header-mat-card{
+        width:220%;
+
+    }
+
+}
+@media only screen and (max-device-width:500px){
+    .header-mat-card{
+        width:320%;
+    }
+    table{
+        width: 100%;
+    }
+
+}

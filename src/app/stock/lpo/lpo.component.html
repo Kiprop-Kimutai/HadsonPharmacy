@@ -1,0 +1,112 @@
+<div class = "body">
+    <form [formGroup] = "purchaseOrderFormGroup" (ngSubmit) = "submitLPO()">
+        <mat-card class = "header-mat-card">
+            <table>
+                <tr>
+                    <td>For</td>
+                    <td>
+                      <input matInput formControlName = "ordered_by"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Item</td>
+                    <td>
+                      <input matInput formControlName = "description"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Supplier</td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select formControlName = "supplier">
+                              <mat-option *ngFor="let supplier of suppliers" [value]="supplier" (blur) = "testFormValue()">
+                                {{supplier}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>LPO Number</td>
+                    <td>
+                      <input matInput formControlName = "po_number"/>
+                    </td>
+                </tr>
+                <tr>
+                  <td>Invoice No</td>
+                  <td>
+                    <input matInput formControlName = "invoice_no" placeholder="invoice no"/>
+                  </td>
+                </tr>
+                <tr>
+                    <td>Prepared by</td>
+                    <td>Jonah Hexx</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>
+                      <input matInput formControlName = "date"/>
+                    </td>
+                </tr>
+            </table>
+        </mat-card>
+        <button class = "add-button" mat-raised-button (click) = "addProduct()"><img src = "../../assets/icons/add.png"/></button>
+        <mat-card class = "header-mat-card">
+          <div class = "productsList">
+            <div [formGroup] = "productPlaceHolderFormGroup">
+                <input formControlName = "product_code"/>
+                <input formControlName = "product_name"/>
+                <input formControlName = "gen_name"/>
+                <input  formControlName = "units"/>
+                <input formControlName = "unit_quantity"/>
+                <input  formControlName = "original_quantity"/>
+                <input  formControlName = "unit_price"/>
+                <input  formControlName = "actual_cost"/>
+                <input  formControlName = "discount"/>
+                <input  formControlName = "unit_discount"/>
+                <input  formControlName = "cost"/>
+                <input  formControlName = "ordering_price"/>
+            </div>
+          </div>
+          <div class = "productsList" formArrayName = "products" *ngFor = "let product of purchaseOrderFormGroup.get('products').controls;let i = index">
+            <div [formGroupName] = "i">
+              <!--<input formControlName = "product_code"/>
+              <input formControlName = "product_name"/>
+              <input formControlName = "gen_name"/>-->
+              <mat-form-field style="width:7%">
+                  <mat-select formControlName = "product_code">
+                    <mat-option *ngFor="let item of productCataLogue;let j = index" [value]="item.code" (blur) = "setProductDetails(i,j)">
+                      {{item.code}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="width:7%">
+                    <mat-select formControlName = "product_name">
+                      <mat-option *ngFor="let item of productCataLogue;let j = index;" [value]="item.name" (blur) = "setProductDetails(i,j)">
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field style="width:7%">
+                      <mat-select formControlName = "gen_name">
+                        <mat-option *ngFor="let item of productCataLogue;let j = index;" [value]="item.generic_name" (blur) = "setProductDetails(i,j)">
+                          {{item.generic_name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              <input  type = "number"  formControlName = "units" (mouseleave) = "setProductValues(i)"/>
+              <input  type = "number" formControlName = "unit_quantity" (mouseleave) = "setProductValues(i)"/>
+              <input  type = "number" formControlName = "original_quantity" (mouseleave) = "setProductValues(i)"/>
+              <input  type = "number" formControlName = "unit_price" (mouseleave) = "setProductValues(i)"/>
+              <input type = "number" formControlName = "actual_cost"/>
+              <input  type = "number" formControlName = "discount" (mouseleave) = "setProductValues(i)"/>
+              <input type = "number" formControlName = "unit_discount"/>
+              <input type = "number" formControlName = "cost"/>
+              <input  type = "number" formControlName = "ordering_price"/>
+              <button mat-icon-button color = "primary"><img src = "../../assets/icons/delete-small.png"/></button>
+            </div>
+          </div>
+        </mat-card>
+        </form>
+        <button style = "display:block;margin-right: auto;margin-left: auto;background-color: teal"  mat-raised-button (click) = "submitLPO()" [disabled] = "purchaseOrderFormGroup.status ==='INVALID'">save</button>
+</div>

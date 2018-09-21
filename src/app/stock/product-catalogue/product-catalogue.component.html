@@ -1,0 +1,43 @@
+<div class="body">
+<mat-card>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder = "search product " (keyup) = "filterProductCatalogues($event.target.value)"/>
+        </mat-form-field>
+    </div>
+  <div>
+    <!--<p *ngFor = "let product of products">{{product.product_code}} | {{product.ordering_price}}  | {{product.selling_price}} </p><br>-->
+    <table mat-table [dataSource]="productCataLogue" class="mat-elevation-z8">
+
+            <!-- product code Column -->
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> product code </th>
+              <td mat-cell *matCellDef="let product_catalogue" (click) = "loadSelectedItem(product_catalogue.code)"> {{product_catalogue.code}} </td>
+            </ng-container>
+          
+            <!-- generic name Column -->
+            <ng-container matColumnDef="generic_name">
+              <th mat-header-cell *matHeaderCellDef> generic name</th>
+              <td mat-cell *matCellDef="let product_catalogue" (click) = "loadSelectedItem(product_catalogue.generic_name)"> {{product_catalogue.generic_name}} </td>
+            </ng-container>
+          
+            <!-- product name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> product name</th>
+              <td mat-cell *matCellDef="let product_catalogue" (click) = "loadSelectedItem(product_catalogue.name)"> {{product_catalogue.name}} </td>
+            </ng-container>
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <div>
+                <mat-paginator [length]= "dataLength"
+                              [pageSize]="pageSize"
+                              [pageSizeOptions]="[2, 3, 5, 10, 25, 100]"
+                              (page) = "pageEvent = $event" (page) = "paginateValues(pageEvent.pageSize,pageEvent.pageIndex)">
+                </mat-paginator >
+                </div>
+</div>
+</mat-card>
+</div>
