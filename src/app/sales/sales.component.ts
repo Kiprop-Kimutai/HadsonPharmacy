@@ -3,7 +3,7 @@ import {Sales} from '../models/sales';
 import {SalesOrder} from '../models/sales_order';
 import {Product} from '../models/products';
 import {FormControl,FormGroup,Validators} from '@angular/forms';
-import {ProductsService} from '../products/products.service';
+import {ProductsService} from '../stock/products/products.service';
 import {MatTableDataSource,PageEvent} from '@angular/material';
 import {paginatorFunction} from '../common/PaginatorFunction';
 import {SalesOrderComponent} from './salesorder.component';
