@@ -18,16 +18,22 @@ import {PageNotFoundComponent} from './page-not-found.component';
 import {DeviceListComponent} from './device/device-list.component';
 import {DeviceComponent} from './device/device.component';
 import {DeviceFirmwareComponent} from './device_firmware/device_firmware';
-import {ProductsComponent} from './products/products.component';
-import {ProductDialog} from './products/products.dialog';
-import {LpoComponent} from './lpo/lpo.component';
+import {ProductsComponent} from './stock/products/products.component';
+import {ProductDialog} from './stock/products/products.dialog';
+import {LpoComponent} from './stock/lpo/lpo.component';
+import {StockService} from './stock/stock.service';
+import {WedComponent} from './stock/lpo/wed.component';
+import {ProductCatalogueComponent} from './stock/product-catalogue/product-catalogue.component';
+import {LpoListComponent} from './stock/lpo-list/lpo-list.component';
+import {LpoDetailComponent} from './stock/lpo-list/lpo-detail.component';
 import {SalesComponent,SalesOrderComponent1} from './sales/sales.component';
 import {SalesOrderComponent} from './sales/salesorder.component';
+import {TestComponent} from './stock/lpo/test.component';
 import {SalesDialog} from './sales/sales-dialog';
 import {CustomersComponent} from './customers/customers.component';
 import {CustomerDialog} from './customers/customer.dialog';
-import {SuppliersComponent} from './suppliers/suppliers.component';
-import {SupplierDialogComponent} from './suppliers/suppliers.dialog';
+import {SuppliersComponent} from './stock/suppliers/suppliers.component';
+import {SupplierDialogComponent} from './stock/suppliers/suppliers.dialog';
 import {SalesReportComponent} from './reports/salesreport/salesreport.component';
 import {StockReportComponent} from './reports/stockreport/stockreport.component';
 import {FilterDevicess} from './device/filterDevices';
@@ -38,6 +44,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
 import {DialogService} from './dialog.service';
 import {HttpClientModule} from '@angular/common/http';
+import { LPOService } from './stock/lpo/lpo.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,14 +57,14 @@ import {HttpClientModule} from '@angular/common/http';
     DashboardComponent,DeviceFirmwareComponent,ProductsComponent,SalesComponent,SalesOrderComponent,SalesDialog,ProductDialog,
     PageDirective,DeviceDialog,DeviceComponent,DeviceListComponent,FilterDevicess,PageNotFoundComponent,
     CustomersComponent,CustomerDialog,SupplierDialogComponent,SuppliersComponent,SalesReportComponent,StockReportComponent,
-    SalesOrderComponent1,LpoComponent
+    SalesOrderComponent1,LpoComponent,TestComponent,WedComponent,ProductCatalogueComponent,LpoListComponent,LpoDetailComponent
   ],
   imports: [
     BrowserModule,CommonModule,BrowserAnimationsModule,AppRoutingModule,ReactiveFormsModule,FormsModule,MaterialModule,
     FlexLayoutModule,ChartsModule,ServiceModule,HttpClientModule
 
   ],
-  providers: [UserFormService,DialogService],
+  providers: [UserFormService,DialogService,StockService,LPOService],
   entryComponents:[LoginFormComponent,RegisterFormComponent,DeviceDialog,ProductDialog,SalesDialog,CustomerDialog,
   SupplierDialogComponent],
   exports:[FlexLayoutModule],
