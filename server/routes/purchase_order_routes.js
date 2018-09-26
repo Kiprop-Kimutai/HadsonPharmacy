@@ -1,5 +1,6 @@
 var express = require('express');
 var PurchaseOrder = require('../models/purchase_order');
+var Product = require('../models/products');
 var ApiResponse = require('../models/response');
 var app = express();
 
@@ -11,7 +12,44 @@ app.get('/',(req,res,next) =>{
 //save lpo's
 app.post('/save_lpo', function(req,res,next){
     console.log(req.body);
+    console.log("--------");
     console.log(req.body.products);
+    //return new ApiResponse(201,"ok");
+    //if status is 'received' or 'cancelled'
+    if(req.body.status === 'received' || req.body.status === 'cancelled'){
+        //update the lpo as received, then save products to products'table
+        new Promise((resolve,reject) =>{
+            PurchaseOrder.update({id:req.body.id},req.body,(err,res) =>{
+                if(err){
+                    console.error("Error updating LPO item");
+                    reject(new ApiResponse(307,"Error updating LPO"));
+                }
+                else{
+                    console.log("Document updated successfully");
+                    console.log("-------GOING TO UPDATE PRODUCTS----------------");
+                    //loop through products in lpoItem saving each item
+                    for(product of req.body.products){
+                        console.log("------pppppp----------");
+                        console.log(product);
+                        //var productt = new Product(product);
+                        new Product(product).save((err)=>{
+                            if(err){
+                                console.log(err);
+                                console.log("Error adding product code "+product.product_code + " to stock");
+                                //continue
+                            }
+                        });
+                    }
+                    resolve(new ApiResponse(201,"LPO item updated successfully"));
+                }
+            })
+        }).then((response) =>{
+            res.json(response);
+        })
+    }
+
+    //if status is 'pending'
+    else{
     new Promise((resolve,reject) =>{
         var lpo = new PurchaseOrder({
             ordered_by:req.body.ordered_by,
@@ -38,6 +76,7 @@ app.post('/save_lpo', function(req,res,next){
         console.log(result);
         res.json(result);
     })
+    }
 })
 
 //retrieve last LPO index
@@ -69,6 +108,7 @@ app.get('/last_lpo_index',(req,res,next)=>{
 
 //get all lpos
 app.get('/fetch_all_lpos',function(req,res,next){
+    console.log("<------->");
     new Promise((resolve,reject)=>{
         PurchaseOrder.find({},function(err,lpos){
             if(err){
@@ -86,7 +126,6 @@ app.get('/fetch_all_lpos',function(req,res,next){
 
 //get all pending lpos
 app.get('/fetch_pending_lpos',(req,res,next) =>{
-    console.log("---------");
     new Promise((resolve,reject) =>{
         PurchaseOrder.find({status:"pending"},(err,lpos)=>{
             if(err){
@@ -102,5 +141,26 @@ app.get('/fetch_pending_lpos',(req,res,next) =>{
         res.send(response);
     })
 })
+
+//get pending LPO item by id
+app.post('/fetch_onepending_lpo', (req,res,next) =>{
+    console.log(req.body);
+    new Promise((resolve,reject) =>{
+        PurchaseOrder.find({id:req.body.Id},(err,lpoItem) =>{
+            if(err){
+                console.error(err);
+                reject(new ApiResponse(306,"Error retreiving requested LPO item"));
+            }
+            else{
+                console.log(lpoItem[0]);
+                resolve(new ApiResponse(201,lpoItem[0]));
+            }
+        }).then((response) =>{
+            res.send(response);
+        })
+    })
+})
+
+//update received lpo
 
 module.exports = app;
