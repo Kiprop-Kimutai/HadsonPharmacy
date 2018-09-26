@@ -44,7 +44,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
 import {DialogService} from './dialog.service';
 import {HttpClientModule} from '@angular/common/http';
-import { LPOService } from './stock/lpo/lpo.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +63,7 @@ import { LPOService } from './stock/lpo/lpo.service';
     FlexLayoutModule,ChartsModule,ServiceModule,HttpClientModule
 
   ],
-  providers: [UserFormService,DialogService,StockService,LPOService],
+  providers: [UserFormService,DialogService,StockService],
   entryComponents:[LoginFormComponent,RegisterFormComponent,DeviceDialog,ProductDialog,SalesDialog,CustomerDialog,
   SupplierDialogComponent],
   exports:[FlexLayoutModule],
