@@ -1,7 +1,9 @@
 .body{
     min-height: 100vh;
-    background-color: aliceblue;
 }
 table{
     width:100%
+}
+mat-card{
+    margin:5px;
 }
