@@ -1,3 +1,163 @@
 <div class = "body">
-    <h3>Render LPO details here</h3>
+<form #testform>
+<mat-card>
+            <table>
+                    <tr>
+                        <td>For</td>
+                        <td>
+                          <input matInput [(ngModel)] = "lpoItem.ordered_by" name = "ordered_by"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Item</td>
+                        <td>
+                          <input matInput [(ngModel)] = "lpoItem.description" name = "description" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Supplier</td>
+                        <td>
+                            <input [(ngModel)] = "lpoItem.supplier" name = "supplier"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LPO Number</td>
+                        <td>
+                          <input matInput [(ngModel)] = "lpoItem.po_number" name = "po_number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Invoice No</td>
+                      <td>
+                          <mat-form-field>
+                            <input matInput [(ngModel)] = "lpoItem.invoice_no" name = "invoice_no" required/>
+                          </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Prepared by</td>
+                        <td>Jonah Hexx</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>
+                          <input matInput [(ngModel)] = "lpoItem.updated_at" name = "updated_at"/>
+                        </td>
+                    </tr>
+                </table>
+    <table mat-table [dataSource]="lpoItem.products" class="mat-elevation-z8" style="margin-top:10px;" *ngFor = "let currentproduct of products;let i = index">
+                
+          <!-- product code/description Column -->
+          <ng-container matColumnDef="product_code">
+                <th mat-header-cell *matHeaderCellDef>product code</th>
+                <td mat-cell *matCellDef="let product"> {{product.product_code}} </td>
+              </ng-container>
+        
+          <!-- product name Column -->
+          <ng-container matColumnDef="product_name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let product"> {{product.product_name}} </td>
+          </ng-container>
+        
+          <!-- generic name Column -->
+          <ng-container matColumnDef="gen_name">
+            <th mat-header-cell *matHeaderCellDef> Generic Name </th>
+            <td mat-cell *matCellDef="let product"> {{product.gen_name}} </td>
+          </ng-container>
+       
+          <!-- units Column -->
+          <ng-container matColumnDef="units">
+            <th mat-header-cell *matHeaderCellDef>Units</th>
+            <td mat-cell *matCellDef="let product"> {{product.units}} </td>
+          </ng-container>
+          <!-- unit quantity Column -->
+          <ng-container matColumnDef="unit_quantity">
+          <th mat-header-cell *matHeaderCellDef>Unit Quantity</th>
+          <td mat-cell *matCellDef="let product"> {{product.unit_quantity}} </td>
+          </ng-container>
+
+          <!-- Original quantity Column -->
+          <ng-container matColumnDef="original_quantity">
+                <th mat-header-cell *matHeaderCellDef>Original qty</th>
+                <td mat-cell *matCellDef="let product"> {{product.original_quantity}} </td>
+         </ng-container>
+
+        <!-- unit  price Column -->
+        <ng-container matColumnDef="unit_price">
+        <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+        <td mat-cell *matCellDef="let product"> {{product.unit_price}} </td>
+        </ng-container>
+
+        <!-- actual cost Column -->
+        <ng-container matColumnDef="actual_cost">
+        <th mat-header-cell *matHeaderCellDef>Actual Cost</th>
+        <td mat-cell *matCellDef="let product">
+            {{product.actual_cost}}
+         </td>
+        </ng-container>
+
+        <!-- discount Column -->
+        <ng-container matColumnDef="discount">
+        <th mat-header-cell *matHeaderCellDef>Discount</th>
+        <td mat-cell *matCellDef="let product;let i=index;">
+            <mat-form-field>
+             <input type = "number" matInput [(ngModel)] = "product.discount" name  = "discount" (keyup) = "setProductValues(i)" (click) = "setProductValues(i)" required/>
+            </mat-form-field>
+        </td>
+        </ng-container>
+
+        <!-- unit_discount Column -->
+        <ng-container matColumnDef="unit_discount">
+        <th mat-header-cell *matHeaderCellDef>Unit Discount</th>
+        <td mat-cell *matCellDef="let product">{{product.unit_discount}}</td>
+        </ng-container>
+
+        <!-- Cost of stock Column -->
+        <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef>Cost</th>
+        <td mat-cell *matCellDef="let product"> 
+            {{product.cost}}
+        </td>
+        </ng-container>
+
+        <!-- ordering price Column -->
+        <ng-container matColumnDef="ordering_price">
+        <th mat-header-cell *matHeaderCellDef>Odering Price</th>
+        <td mat-cell *matCellDef="let product"> {{product.ordering_price}} </td>
+        </ng-container>
+
+        <!-- selling price Column -->
+        <ng-container matColumnDef="selling_price">
+        <th mat-header-cell *matHeaderCellDef>Selling Price</th>
+        <td mat-cell *matCellDef="let product;let j = index;">
+            <mat-form-field>
+                <input type = "number" matInput [(ngModel)] = "product.selling_price" name = "selling_price" (keyup) = "setProductValues(j)" (click) = "setProductValues(j)" required/>
+            </mat-form-field>
+            </td>
+        </ng-container>
+
+        <!--profit Column -->
+        <ng-container matColumnDef="profit">
+        <th mat-header-cell *matHeaderCellDef>Profit</th>
+        <td mat-cell *matCellDef="let product"> {{product.profit}}</td>
+        </ng-container>
+    
+        <!-- expiry date Column -->
+        <ng-container matColumnDef="expiry_date" style = "margin-left:20px;">
+        <th mat-header-cell *matHeaderCellDef >Expiry Date</th>
+        <td mat-cell *matCellDef="let product;let j = index">
+                <mat-form-field style = "margin-left:20px;">
+                        <input  matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)] = "product.expiry_date" name = "expiry_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+            </td>
+        </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        </table>
+</mat-card>
+</form>
+<button (click) ="addToStock()">Test</button>
 </div>
