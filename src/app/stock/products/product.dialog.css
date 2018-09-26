@@ -2,6 +2,9 @@ table{
     width:100%;
   
   }
+mat-card{
+  width:100%;
+}
   tr:hover{
   }
   .mat-form-field {
@@ -71,9 +74,12 @@ table{
   }
   
   @media only screen and (max-device-width:643px){
-    table,mat-paginator{
+    /*table,mat-paginator{
      width:200%;
-    }
+    }*/
+    mat-card,mat-paginator{
+      width:200%;
+     }
     .filterField{
       width:70%;
     }
@@ -83,9 +89,11 @@ table{
   
   }
   @media only screen and (max-device-width:394px){
-    table,mat-paginator{
+    /*table,mat-paginator{
       width:200%;
-      /*background-color: aqua;*/
+    }*/
+    mat-card,mat-paginator{
+      width:200%;
     }
     .filterField{
       width:100%;
@@ -93,7 +101,10 @@ table{
   
   }
   @media only screen and (max-device-width:300px){
-    table,mat-paginator{
+   /* table,mat-paginator{
+      width:250%;
+    }*/
+    mat-card,mat-paginator{
       width:250%;
     }
     .filterField{
@@ -109,7 +120,10 @@ table{
     }
   }
   @media only screen and (max-device-width:240px){
-    table,mat-paginator{
+    /*table,mat-paginator{
+      width:400%;
+    }*/
+    mat-card,mat-paginator{
       width:400%;
     }
     .filterField{
