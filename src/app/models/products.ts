@@ -22,4 +22,12 @@ export class Product {
         public expiry_date ?:Date,
         public created_at ?:Date,
         public updated_at ?:Date){}
+
+        public  setDate = function setExpiryDate(date:Date){
+            this.expiry_date = date;
+        }
+
+        public getExpiryDate():Date{
+            return this.expiry_date;
+        }
 }
