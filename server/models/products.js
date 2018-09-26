@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 //create a counter schema for auto-increment purposes
 var counterSchema = new Schema({
-    _id:{type:String,require:true},
+    _id:{type:String,required:true},
     seq:{type:Number,default:0}
 }
 )
@@ -42,6 +42,7 @@ productsSchema.pre('save',function(next){
     console.log(">>>");
     products_counter.findByIdAndUpdate({_id:'entityId'},{$inc:{seq:1}},{new:true,upsert:true}).then(function(count){
         doc.product_id = count.seq;
+        console.log("ID:::>>"+doc.product_id);
         var date = new Date();
 
         if(!doc.created_at){
