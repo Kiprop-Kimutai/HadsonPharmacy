@@ -3,6 +3,7 @@ import {ProductDialog} from './products.dialog';
 import {MatDialog,PageEvent,MatTableDataSource} from '@angular/material';
 import {Product} from '../../models/products';
 import {ProductsService}  from './products.service';
+import {StockService} from '../stock.service';
 import {paginatorFunction} from '../../common/PaginatorFunction';
 @Component({
     selector:'product-component',
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit{
     pageSize:number;
     displayedColumns:string[];
     pageIndex:number = 0;
-    constructor(private dialog:MatDialog,private productService:ProductsService){}
+    constructor(private dialog:MatDialog,private stockservice:StockService){}
     addNewProduct(){
         const dialogRef = this.dialog.open(ProductDialog,{
             height:'auto',
@@ -45,7 +46,7 @@ export class ProductsComponent implements OnInit{
             }
     }
     fetchAllProducts():Product[]{
-        this.productService.fetchAllProducts().subscribe(data =>{this.products = data.response_message;this.productsCopy = data.response_message;this.paginatedProducts = data.response_message;this.dataLength = data.response_message.length;console.log(data)})
+        this.stockservice.fetchAllProducts().subscribe(data =>{this.products = data.response_message;this.productsCopy = data.response_message;this.paginatedProducts = data.response_message;this.dataLength = data.response_message.length;console.log(data)})
         return this.products;
     }
     paginateValues(pageSize:number,pageIndex:number){
