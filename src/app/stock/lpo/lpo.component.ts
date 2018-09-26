@@ -3,14 +3,13 @@ import {PurchaseOrder} from '../../models/purchase_order';
 import {Product} from '../../models/products';
 import {FormControl,Validators,FormGroup,FormArray,FormBuilder} from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
-import {LPOService} from './lpo.service';
 import {StockService} from "../stock.service";
 import {ProductCataLogue} from '../../models/product_catalogue';
 @Component({
     selector:'lpo',
     templateUrl:'./lpo.component.html',
     styleUrls:['./lpo.component.css'],
-    providers:[LPOService]
+    providers:[StockService]
 })
 export class LpoComponent implements OnInit{
     productCataLogue:ProductCataLogue[];
@@ -22,7 +21,7 @@ export class LpoComponent implements OnInit{
     productsToOrder:Product[] =[];
     dataSource:MatTableDataSource<Product>;
     suppliers:string[] = ["Cosmos","Kemsa","Europa"];
-    constructor(private lpoService:LPOService,private fb:FormBuilder,private stockService:StockService){
+    constructor(private fb:FormBuilder,private stockService:StockService){
         this.createForm();
         this.createProductPlaceHolders();
         
@@ -134,10 +133,10 @@ export class LpoComponent implements OnInit{
     submitLPO(){
         console.log("will attempt to save LPO");
         console.log(this.purchaseOrderFormGroup.getRawValue());
-        this.lpoService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
+        this.stockService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
     }
     getPurchaseId(){
-        this.lpoService.getLpoID().subscribe(data =>{console.log(data);this.purchaseOrderFormGroup.get('po_number').setValue(data.response_message)});
+        this.stockService.getLpoID().subscribe(data =>{console.log(data);this.purchaseOrderFormGroup.get('po_number').setValue(data.response_message)});
     }
 
     testFormValue(){
