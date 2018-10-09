@@ -29,7 +29,7 @@ import {LpoDetailComponent} from './stock/lpo-list/lpo-detail.component';
 import {SalesComponent,SalesOrderComponent1} from './sales/sales.component';
 import {SalesOrderComponent} from './sales/salesorder.component';
 import {TestComponent} from './stock/lpo/test.component';
-import {SalesDialog} from './sales/sales-dialog';
+import {ReceiptDialog} from './sales/receipt.dialog';
 import {CustomersComponent} from './customers/customers.component';
 import {CustomerDialog} from './customers/customer.dialog';
 import {SuppliersComponent} from './stock/suppliers/suppliers.component';
@@ -53,10 +53,11 @@ import {HttpClientModule} from '@angular/common/http';
     NavListComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    DashboardComponent,DeviceFirmwareComponent,ProductsComponent,SalesComponent,SalesOrderComponent,SalesDialog,ProductDialog,
+    DashboardComponent,DeviceFirmwareComponent,ProductsComponent,SalesComponent,SalesOrderComponent,ProductDialog,
     PageDirective,DeviceDialog,DeviceComponent,DeviceListComponent,FilterDevicess,PageNotFoundComponent,
     CustomersComponent,CustomerDialog,SupplierDialogComponent,SuppliersComponent,SalesReportComponent,StockReportComponent,
-    SalesOrderComponent1,LpoComponent,TestComponent,WedComponent,ProductCatalogueComponent,LpoListComponent,LpoDetailComponent
+    SalesOrderComponent1,LpoComponent,TestComponent,WedComponent,ProductCatalogueComponent,LpoListComponent,LpoDetailComponent,
+    ReceiptDialog
   ],
   imports: [
     BrowserModule,CommonModule,BrowserAnimationsModule,AppRoutingModule,ReactiveFormsModule,FormsModule,MaterialModule,
@@ -64,8 +65,8 @@ import {HttpClientModule} from '@angular/common/http';
 
   ],
   providers: [UserFormService,DialogService,StockService],
-  entryComponents:[LoginFormComponent,RegisterFormComponent,DeviceDialog,ProductDialog,SalesDialog,CustomerDialog,
-  SupplierDialogComponent],
+  entryComponents:[LoginFormComponent,RegisterFormComponent,DeviceDialog,ProductDialog,CustomerDialog,
+  SupplierDialogComponent,ReceiptDialog],
   exports:[FlexLayoutModule],
   bootstrap: [AppComponent]
 })
