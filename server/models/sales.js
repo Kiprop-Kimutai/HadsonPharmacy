@@ -9,10 +9,11 @@ var counterSchema = new Schema({
 
 var sales_counter = mongoose.model('sales_counter',counterSchema);
 
-var salesChema = new Schema({
+var salesSchema = new Schema({
     id:{type:Number,unique:true},
     receipt_number:{type:String,unique:true},
     cashier:{type:String},
+    cash:{type:Number},
     amount:{type:Number},
     profit:{type:Number},
     name:{type:String},
@@ -20,7 +21,7 @@ var salesChema = new Schema({
     created_at:{type:Date}
 })
 
-salesSchema.pre('save',function(nex){
+salesSchema.pre('save',function(next){
     var doc = this;
     sales_counter.findByIdAndUpdate({_id:'entityId'},{$inc:{seq:1}},{new:true,upsert:true}).then(function(count){
         doc.id = count.seq;
@@ -29,13 +30,13 @@ salesSchema.pre('save',function(nex){
         if(!doc.created_at){
             doc.created_at = date;
         }
-        //doc.updated_at = date;
-        next();
+        doc.updated_at = date;
+       next();
     }).catch(function(err){
         console.error(err);
         throw err;
     });
 })
 
-var Sales = mongoose.model('Sales',salesChema);
+var Sales = mongoose.model('Sales',salesSchema);
 module.exports = Sales;
