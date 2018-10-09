@@ -1,0 +1,76 @@
+<div class = "body">
+    <div [hidden] = "!hideReceiptPreview">
+        <mat-card>
+            <span>Enter amount</span>
+            <form [formGroup] = "cashierFormGroup">
+                <mat-form-field>
+                        <input type = "number" matInput formControlName = "amount" required/><br>
+                </mat-form-field>
+            </form>
+            <button [disabled] = "cashierFormGroup.status === 'INVALID'" mat-flat-button style = "background-color: teal" (click) = "toggleCashDrawer()">ok</button>
+        </mat-card>
+    </div>
+    <div [hidden] = "hideReceiptPreview">
+        <mat-dialog-content>
+    <mat-card>
+        <span>--------------------------------------------</span><br>
+        <table>
+        <tr><td><span>{{title}}</span><br></td></tr>
+        <tr><td><span>Description:</span></td><span>{{description}}</span><td></td></tr>
+        <tr><td><span>Receipt no:</span></td><span>12345</span><td></td></tr>
+        </table>
+        <span>---------------------------------------------</span><br>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>VAT</th>
+            </tr>
+            <tr *ngFor = "let salesorder of data.sales">
+                <td>{{salesorder.name}}</td>
+                <td>{{salesorder.quantity}}</td>
+                <td>{{salesorder.amount}}</td>
+                <td>0.0</td>
+            </tr>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>{{sales.amount}}</td>
+                    <td>0.0</td>
+                </tr>
+            </tfoot>
+        </table>
+        <span>--------------------------------------------</span>
+        <table style = "width:100%">
+            <tr>
+                <th>Cash</th>
+                <th>Total</th>
+                <th>Balance</th>
+                <th>--</th>
+            </tr>
+        <tr>
+            <td>{{sales.cash}}</td>
+            <td>{{sales.amount}}</td>
+            <td>{{sales.balance}}</td>
+            <td>0.0</td>
+        </tr>
+    </table>
+    <span>------------------------------------------------</span>
+    <table>
+        <tr>
+            <td>Served By:</td>
+            <td>Jonah Hexx</td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td>{{currentTime}}</td>
+        </tr>
+    </table>
+    <span>----------------------------------------------</span>
+    </mat-card>
+    </mat-dialog-content>
+    <button  [hidden] = "hidePrintButton" mat-flat-button (click) = "printReceipt()" style = "background-color:teal;margin-left:30%;margin-top:5%;"><img src = "../../assets/icons/print.png"/>Print</button>
+    </div>
+</div>
