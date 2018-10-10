@@ -63,8 +63,7 @@ export class ReceiptDialog implements OnInit{
         setTimeout(() =>this.salesService.postSales(this.sales,this.data.sales).subscribe(res =>{
             console.log(res);
             this.dialogRef.close();
-            //this.router.navigate(['/layout/dashboard']);
-            this.router.navigate(['sales']);
+            this.router.navigate(['/layout/sales']);
 
         }),110);
         //setTimeout(()=>window.print(),100);
