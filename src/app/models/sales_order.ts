@@ -11,6 +11,7 @@ export class SalesOrder{
         public gen_name:string,
         public name:string,//product name
         public price:Number,
+        public ordering_price:Number,
         public discount:Number,
         public created:Date
     ){}
