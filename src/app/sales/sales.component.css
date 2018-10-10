@@ -8,7 +8,8 @@ tr:hover{
     background-color: rgba(243, 237, 237, 0.856);
   }
 mat-card{
-    width:100%
+    width:100%;
+    margin:5px;
 }
 
 .search-icon{
@@ -19,10 +20,10 @@ mat-card{
 }
 @media only screen and(max-device-width:450px){
     table{
-        width:105%;
+        width:100%;
     }
     mat-card{
-        
+        width:110%;
     }
    
 }
