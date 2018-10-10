@@ -33,6 +33,7 @@ export class SalesComponent implements OnInit{
     name:String = "Jonah Hexx";
     constructor(private productsService:ProductsService){
         this.createForms();
+        //this.salesOrderComponent.setValues([]);
     }
     createForms(){
         this.salesFormGroup = new FormGroup({
@@ -88,13 +89,10 @@ export class SalesComponent implements OnInit{
     }
 
     loadSelectedItem(id:number){
-        console.log("Trying.....");
-        console.log(id);
         selectedProductId = id;
         this.showproductslist = false;
         this.showsalesTable = true;
         this.selectedProducts = this.products.filter(this.findProductById);
-        //this.showsalesTable = false;
         this.salesOrderCart = this.castSelectedProductToSalesOrder(this.selectedProducts);
         this.salesOrderComponent.setValues(this.salesOrderCart);
     }
@@ -102,8 +100,8 @@ export class SalesComponent implements OnInit{
     castSelectedProductToSalesOrder(products:Product[]):SalesOrder[]{
         for(var i =0;i<products.length;i++){
         
-            this.salesOrder.push(new SalesOrder(0,"",products[i].invoice_no,""+products[i].product_id,4,((products[i].selling_price)*4),
-                        (4*products[i].profit),products[i].product_code,products[i].gen_name,products[i].gen_name,products[i].selling_price,products[i].discount,new Date()));
+            this.salesOrder.push(new SalesOrder(0,"",products[i].invoice_no,""+products[i].product_id,1,((products[i].selling_price)*1),
+                        (1*products[i].profit),products[i].product_code,products[i].gen_name,products[i].product_name,products[i].selling_price,products[i].ordering_price,products[i].discount,new Date()));
         }
         console.log("*****************************>>");
         console.log(this.salesOrder);
@@ -112,11 +110,19 @@ export class SalesComponent implements OnInit{
     }
 
     findProductById(product){
-        return product.id == selectedProductId;
+        return product.product_id == selectedProductId;
+    }
+
+    deleteItemFromCart(salesOrder:SalesOrder[]){
+        this.salesOrderComponent.setValues(salesOrder);
+        this.salesOrder = salesOrder;
+
     }
 
     ngOnInit(){
         //this.fetchProducts();
+        this.salesOrderCart = [];
+        //reset cart vaues after page load/reload
         this.dataSource = new MatTableDataSource(this.fetchProducts());
         this.productsdisplayedColumns = ['product_name','gen_name','product_code','onhand_qty','created_at','selling_price'];
         this.pageSize = 10;
