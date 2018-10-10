@@ -12,8 +12,8 @@ export class DashboardComponent implements OnInit {
   showBarChart_xs:boolean;
   height:number = 15;
   public lineChartData:Array<any> = [
-    {data: [1.1, 1.2, 1.25, 2.00, 2.50, 2.50, 2.50], label: 'SARAL INFO'},
-    {data: [1.10, 1.10, 1.20, 1.25, 1.25, 2.00, 2.10], label: 'NEWPOS 9220'}
+    {data: [1.1, 1.2, 1.25, 2.00, 2.50, 2.50, 2.50], label: 'Sales'},
+    {data: [1.10, 1.10, 1.20, 1.25, 1.25, 2.00, 2.10], label: 'Purchase'}
   ];
   public lineChartLabels:Array<any> = ['1.0.0', '1.1.0', '1.2.0', '1.3.0', '1.3.1', '1.3.2', '1.3.4'];
   public lineChartOptions:any = {
@@ -49,14 +49,14 @@ export class DashboardComponent implements OnInit {
 public lineChartType:string = 'line';
 
 //pie chart
-public pieChartLabels:string[] = ['SARAL INFO', 'NEWPOS 9220'];
-public pieChartData:number[] = [30, 500];
+public pieChartLabels:string[] = ['EUROPA', 'COSMOS',"KEMSA"];
+public pieChartData:number[] = [30, 45,25];
 public pieChartType:string = 'pie';
 
 //bar-line chart
 public lineChartBarData:Array<any> = [
-    {data:[5, 5, 15, 10, 10, 5, 10],label:'SARAL INFO'},
-    {data:[0, 2, 2, 2, 5, 27, 40],label:'NEWPOS 9220'}
+    {data:[5, 5, 15, 10, 10, 5, 10],label:'Expiries'},
+    {data:[0, 2, 2, 2, 5, 27, 40],label:'New Stock'}
   ];
   public lineChartBarLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartBarType:string = 'line';
