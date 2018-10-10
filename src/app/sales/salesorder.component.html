@@ -1,60 +1,69 @@
 <div>
+        <mat-card>
         <table mat-table [dataSource]="salesOrderCopy" class="mat-elevation-z8">
   
                 <!-- product name Column -->
                 <ng-container matColumnDef="invoice_no">
                   <th mat-header-cell *matHeaderCellDef> invoice no </th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product.id)"> {{salesorder.invoice_no}} </td>
+                  <td mat-cell *matCellDef="let salesorder"> {{salesorder.invoice_no}} </td>
                 </ng-container>
               
                 <!-- generic name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef>name</th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.name}} </td>
+                  <td mat-cell *matCellDef="let salesorder"> {{salesorder.name}} </td>
                 </ng-container>
               
                 <!-- product code Column -->
                 <ng-container matColumnDef="gen_name">
                   <th mat-header-cell *matHeaderCellDef>generic name</th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.gen_name}} </td>
+                  <td mat-cell *matCellDef="let salesorder"> {{salesorder.gen_name}} </td>
                 </ng-container>
               
                 <!-- on-hand qty Column -->
                 <ng-container matColumnDef="product_code">
                   <th mat-header-cell *matHeaderCellDef>product code</th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.product_code}} </td>
+                  <td mat-cell *matCellDef="let salesorder"> {{salesorder.product_code}} </td>
                 </ng-container>
               
                 <!-- created_at Column -->
                 <ng-container matColumnDef="price">
                   <th mat-header-cell *matHeaderCellDef>price</th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.price}} </td>
+                  <td mat-cell *matCellDef="let salesorder"> {{salesorder.price}} </td>
                 </ng-container>
               
                 <!-- selling price Column -->
                 <ng-container matColumnDef="quantity">
                   <th mat-header-cell *matHeaderCellDef>quantity</th>
-                  <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"><input type = "number"  value = {{salesorder.quantity}}/></td>
+                  <td mat-cell *matCellDef="let salesorder;let i =index;">
+                    <!--<input type = "number"  value = {{salesorder.quantity}}/>-->
+                    <input type="number" [(ngModel)] = "salesorder.quantity" name = "quantity" (keyup) = "setSalesDetails(i)" (click) = "setSalesDetails(i)"/>
+                  </td>
                 </ng-container>
 
                 <!-- selling price Column -->
                 <ng-container matColumnDef="amount">
                     <th mat-header-cell *matHeaderCellDef>amount</th>
-                    <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.amount}} </td>
+                    <td mat-cell *matCellDef="let salesorder">{{salesorder.amount}} </td>
                 </ng-container>
                 <!-- selling price Column -->
                 <ng-container matColumnDef="profit">
                     <th mat-header-cell *matHeaderCellDef>profit</th>
-                    <td mat-cell *matCellDef="let salesorder" (click) = "loadSelectedItem(product.product_id)"> {{salesorder.profit}} </td>
+                    <td mat-cell *matCellDef="let salesorder"> 
+                     {{salesorder.profit}}
+                    </td>
                 </ng-container>
                 <!-- selling price Column -->
                 <ng-container matColumnDef="Action">
                     <th mat-header-cell *matHeaderCellDef>Action</th>
-                    <td mat-cell *matCellDef="let salesorder" (click) = "delete(salesorder.product_id)"><img src = "../../assets/icons/cancel.png"/></td>
+                    <td mat-cell *matCellDef="let salesorder;let i = index" (click) = "delete(i)"><img src = "../../assets/icons/cancel.png"/></td>
                 </ng-container>
                                          
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
-              
+        <div>
+          <button [disabled] = "salesOrderCopy.length == 0" mat-raised-button  class = "saveSalesButton" (click) = "saveSales()"><img src = "../../assets/icons/paid.png"/>Save</button>
+        </div>
+      </mat-card>         
  </div>
