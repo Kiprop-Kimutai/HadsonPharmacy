@@ -5,6 +5,7 @@ import {FormControl,Validators,FormGroup,FormArray,FormBuilder} from '@angular/f
 import { MatTableDataSource } from '@angular/material';
 import {StockService} from "../stock.service";
 import {ProductCataLogue} from '../../models/product_catalogue';
+import {ActivatedRoute,Router} from '@angular/router';
 @Component({
     selector:'lpo',
     templateUrl:'./lpo.component.html',
@@ -21,7 +22,7 @@ export class LpoComponent implements OnInit{
     productsToOrder:Product[] =[];
     dataSource:MatTableDataSource<Product>;
     suppliers:string[] = ["Cosmos","Kemsa","Europa"];
-    constructor(private fb:FormBuilder,private stockService:StockService){
+    constructor(private fb:FormBuilder,private stockService:StockService,private route:ActivatedRoute,private router:Router){
         this.createForm();
         this.createProductPlaceHolders();
         
@@ -48,7 +49,7 @@ export class LpoComponent implements OnInit{
             id:new FormControl(''),
             ordered_by:new FormControl({value:'Hadson Dispensing Chemist Ltd',disabled:true},Validators.required),
             description:new FormControl({value:'Purchase Order',disabled:true},Validators.required),
-            supplier:new FormControl('Martin CC'),
+            supplier:new FormControl('Martin CC',[]),
             po_number:new FormControl({value:0,disabled:true},Validators.required),
             invoice_no:new FormControl({value:'',disabled:true},[]),
             status:new FormControl({value:'pending',disabled:true},[]),
@@ -81,7 +82,8 @@ export class LpoComponent implements OnInit{
     }
     addProduct(){
         this.products = this.purchaseOrderFormGroup.get('products') as FormArray;
-        this.products.push(this.createProduct())
+        this.products.push(this.createProduct());
+        console.log(this.router.url);
     }
 
     createProductPlaceHolders(){
@@ -126,17 +128,26 @@ export class LpoComponent implements OnInit{
     }
 
     deleteProduct(index:number){
-        let products = <FormArray>this.purchaseOrderFormGroup.controls.productFormArray;
-        products.removeAt(index);
+        console.log("deleting from cart....");
+        console.log(index);
+        //let products:FormArray = <FormArray>this.purchaseOrderFormGroup.controls.productFormArray;
+        console.log("-----");
+        let products = (this.purchaseOrderFormGroup.get('products') as FormArray).removeAt(index);
+        console.log("--- _ _ _ ---");
     }
 
     submitLPO(){
         console.log("will attempt to save LPO");
         console.log(this.purchaseOrderFormGroup.getRawValue());
-        this.stockService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
+        //this.stockService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
+        this.stockService.print(`http://localhost/4200`+this.router.url).subscribe(data =>{console.log(data)});
     }
     getPurchaseId(){
         this.stockService.getLpoID().subscribe(data =>{console.log(data);this.purchaseOrderFormGroup.get('po_number').setValue(data.response_message)});
+    }
+    
+    private  setSupplier(supplier):void{
+        this.purchaseOrderFormGroup.get('supplier').setValue(supplier);
     }
 
     testFormValue(){
