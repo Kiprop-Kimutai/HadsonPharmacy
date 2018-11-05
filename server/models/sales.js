@@ -38,5 +38,6 @@ salesSchema.pre('save',function(next){
     });
 })
 
-var Sales = mongoose.model('Sales',salesSchema);
-module.exports = Sales;
+//var Sales = mongoose.model('Sales',salesSchema);
+//module.exports = Sales;
+mongoose.model('Sales',salesSchema);
