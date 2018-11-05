@@ -1,6 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var ProductCatalogue = require('../models/product_catalogue');
+var mongoose = require('mongoose');
+var ProductCatalogue = mongoose.model('ProductCatalogue');
+//var ProductCatalogue = require('../models/product_catalogue');
 var ApiResponse = require('../models/response');
 var app = express();
 app.use(bodyParser.json());
