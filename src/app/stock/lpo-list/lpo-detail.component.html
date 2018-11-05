@@ -157,7 +157,7 @@
           <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
           <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
         </table>
+        <button class = "add-to-stock"  mat-raised-button (click) = "addToStock()">Add to Stock</button>
 </mat-card>
 </form>
-<button (click) ="addToStock()">Test</button>
 </div>
