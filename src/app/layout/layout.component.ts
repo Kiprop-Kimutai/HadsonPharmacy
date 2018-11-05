@@ -1,5 +1,5 @@
 import {Component,OnInit} from '@angular/core';
-import {AuthService} from '../login/auth.service';
+import {UserDetails,AuthService} from '../login/auth.service';
 import {MenuService} from './menu-service';
 import {Menu} from '../models/menus';
 @Component({
@@ -8,17 +8,20 @@ import {Menu} from '../models/menus';
   styleUrls:['./layout.component.css']
 })
 export class LayoutComponent implements OnInit{
+  userDetails:UserDetails;
   sidenavMode:string = "";
   isSidenavOpened:boolean = true;
   loggedInuser:string = "";
   menus:Menu[];
   menu:Menu;
+  showprofile:boolean = false;
     constructor(private authService:AuthService,private menuService:MenuService){
     }
     ngOnInit(){
       this.loadSidenavProperties();
       this.loggedInuser = this.authService.loggedInuser;
       this.loadMenus();
+      this.userDetails = this.authService.getUserDetails();
     }
 
     loadSidenavProperties(){
@@ -33,5 +36,18 @@ export class LayoutComponent implements OnInit{
 
     loadMenus(){
       this.menuService.fetchMenus().subscribe(data =>{this.menus = data;console.log(data)})
+    }
+
+    private showProfile():boolean{
+      console.log("....");
+      this.showprofile=  this.showprofile === false ? true:false;
+      console.log(this.showprofile);
+      return this.showprofile;
+
+      //return this.showprofile;
+    }
+
+    private logOut(){
+      this.authService.logout();
     }
 }
