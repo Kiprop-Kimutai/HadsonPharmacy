@@ -7,6 +7,11 @@
 .mat-toolbar{
   background-color: teal;
 }
+.profilewidget{
+ position:absolute;
+ z-index: 2;
+ margin-bottom:-200px;
+}
 .mat-drawer-container {
   height: auto;
   margin: -8px;
