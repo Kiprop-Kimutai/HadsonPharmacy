@@ -3,15 +3,31 @@
 <mat-toolbar class  = "mat-toolbar" fxFlex.sm = "100vw">
 <button mat-icon-button ><img src = "../../assets/icons/menu.png" (click) ="drawer.toggle()"/></button>
 <!--<button  mat-icon-button fxFlexOffset = "90%" fxFlexOffset.gt-md = "94%" matTooltip = <{{loggedInuser}}><img src = "../../assets/icons/account.png"/></button>-->
-<button  mat-icon-button fxFlexOffset = "90%" fxFlexOffset.gt-md = "94%" fxFlexOffset.xs = "77vw" matTooltip = "Jonah Hexx"><img src = "../../assets/icons/account.png"/></button>
+<!--<button  mat-icon-button fxFlexOffset = "90%" fxFlexOffset.gt-md = "94%" fxFlexOffset.xs = "77vw" matTooltip = {{userDetails?.email}}><img src = "../../assets/icons/account.png"/></button>-->
+<button  mat-icon-button fxFlexOffset = "90%" fxFlexOffset.gt-md = "94%" fxFlexOffset.xs = "77vw" (click) = "showProfile()"><img src = "../../assets/icons/account.png"/></button>
 </mat-toolbar>
 </div>
-<div>
+<div style = "z-index: 1">
 <mat-drawer-container class = "mat-drawer-container">
 <mat-drawer mode = {{sidenavMode}}  [opened] = isSidenavOpened class = "mat-drawer" #drawer>
 <navlist-component *ngFor = "let menu of menus" [menu] = menu></navlist-component>
 </mat-drawer>
 <mat-drawer-content>
+        <div *ngIf = "showprofile" class = "profilewidget">
+                <mat-card fxFlexOffset = "68vw">
+                        <!--<mat-nav-list [disableRipple] = "false" style = "size:0.5em">
+                            <mat-list-item [disableRipple] = "false" style = "size:0.5em">
+                                    <span>{{userDetails?.email}}</span><br>
+                            </mat-list-item>
+                            <mat-list-item style = "size:0.5em" [disableRipple] = "false"><button>sign out</button></mat-list-item>
+                        </mat-nav-list>-->
+                        <mat-nav-list>
+                        <a style = "height: 2em" mat-list-item [routerLink] = "">{{userDetails?.email}}</a>
+                        <mat-list-item style = "height:2em" [disableRipple] = "false" (click) = "logOut()">sign out</mat-list-item>
+                    </mat-nav-list>
+                </mat-card>
+        
+         </div>
 <router-outlet></router-outlet>
 </mat-drawer-content>
 </mat-drawer-container>
