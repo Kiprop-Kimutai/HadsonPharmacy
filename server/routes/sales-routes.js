@@ -1,8 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var Sales = require('../models/sales');
-var SalesOrder = require('../models/sales_order');
-var Product = require('../models/products');
+var mongoose = require('mongoose');
+var SalesOrder = mongoose.model('SalesOrder');
+var Product = mongoose.model('Product');
+//var SalesOrder = require('../models/sales_order');
+//var Product = require('../models/products');
 var ApiResponse = require('../models/response');
 
 var app = express();
