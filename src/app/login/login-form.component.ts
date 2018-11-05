@@ -4,6 +4,7 @@ import {Users} from '../models/Users';
 import {UsersPageComponent} from '../users/users-page.component';
 import {AuthService} from './auth.service';
 import {Router,RouterStateSnapshot,ActivatedRouteSnapshot} from '@angular/router';
+import {DialogService} from '../dialog.service';
 @Component({
   selector:'login-form',
   templateUrl:'./login-form.component.html',
@@ -13,12 +14,13 @@ export class LoginFormComponent implements OnInit{
   @Output() loadRegistrationPage = new EventEmitter<number>()
    userForm:FormGroup;
    user:Users = new Users(0,'alexi','alex','smith','alixsmith@newLogic.io','password@private');
-    constructor(private fb:FormBuilder,private usersPageComponent:UsersPageComponent,private authService:AuthService,private router:Router){
+   failedloggedIn:boolean = false;
+    constructor(private fb:FormBuilder,private usersPageComponent:UsersPageComponent,private authService:AuthService,private router:Router,private dialogService:DialogService){
       this.createForm();
     }
     createForm(){
       this.userForm = new FormGroup({
-        'username':new FormControl(this.user.username,[Validators.required,Validators.minLength(4),regexValidator(/[0-9*&^%$$£'"?>:@<;]/)]),
+        'email':new FormControl(this.user.username,[Validators.required,Validators.minLength(4),regexValidator(/[*&^%$$£'"?>:<;]/)]),
         'password':new FormControl(this.user.password,[Validators.required,Validators.minLength(8)])
       /*  'username':['',[Validators.required,Validators.minLength(4)/*,regexValidator(/[a-zA-Z]/,'numbers/special characters not allowed')]],
         'password':['',[Validators.required,Validators.minLength(8)]]*/
@@ -28,8 +30,28 @@ export class LoginFormComponent implements OnInit{
       //this.createForm();
     }
 
-    login(username:string,password:string):any{
-      this.authService.login(username,password).subscribe(data =>{
+    login():any{
+      this.authService.loginn(this.userForm.getRawValue()).subscribe((data) =>{
+        console.log(data);
+        if(data.token){
+          if(this.authService.isLoggedIn){
+            if(this.authService.redirectUrl){
+              this.router.navigate([this,this.authService.redirectUrl]);
+            }
+            else{
+              this.router.navigateByUrl('/layout');
+            }
+          }
+        }
+        else{
+          console.log()
+          this.dialogService.alert('login failed');
+        }
+      },(err)=>{
+        console.log("Error trying to login....");
+        this.dialogService.alert("login failed");
+      });
+     /* this.authService.login(username,password).subscribe(data =>{
         console.log(data);
         if(data == true){
           console.log("Logged in successfully");
@@ -41,15 +63,8 @@ export class LoginFormComponent implements OnInit{
           this.router.navigate(['/layout']);
         }
         console.log("Not logged in");
-      });
-      /*if(this.authService.login(username,password)){
-        console.log("Logged in successfully");
-        console.log(username);
-        this.router.navigate(['/layout']);
-      }
-      else{
-        console.log("Not logged in");
-      }*/
+      });*/
+
     }
 
     get diagnostic(){
