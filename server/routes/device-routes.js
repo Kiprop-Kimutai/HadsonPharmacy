@@ -1,5 +1,7 @@
 var express = require("express");
-var Device = require('../models/device');
+//var Device = require('../models/device');
+var mongoose = require('mongoose');
+var Device = mongoose.model('Device');
 var ApiResponse = require('../models/response');
 var app = express();
 
