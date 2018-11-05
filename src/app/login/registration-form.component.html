@@ -1,6 +1,6 @@
 <div class = "loginform">
 <mat-card style = "margin-bottom:10px;">
-<form [formGroup] = "registrationForm" class = "login-formGroup" >
+<form [formGroup] = "registrationForm" class = "login-formGroup" (ngSubmit) = "register()" >
 <div class = "formGroup">
 <label for = "firstname" class = "field-label">firstname</label><br>
 <mat-form-field class = "input-field">
@@ -24,23 +24,13 @@
 </div>
 </div>
 <div class = "formGroup">
-<label for = "username" class = "field-label">username</label><br>
-<mat-form-field class = "input-field">
-<input matInput id = "username" type = "text"  formControlName = "username" [(ngModel)] = "modelUser.username" name ="username"  required/>
-</mat-form-field>
-<div *ngIf = "registrationForm.get('username').touched">
-<span *ngIf = "registrationForm.hasError('required','username')" class = "input-errors">username is required</span><br>
-<span *ngIf = "registrationForm.hasError('invalidPassword','username')" class = "input-errors">only letters allowed</span>
-</div>
-</div>
-<div class = "formGroup">
 <label for = "email" class = "field-label">email</label><br>
 <mat-form-field class = "input-field">
 <input matInput id = "email" type = "email" formControlName = "email" [(ngModel)] = "modelUser.email" name = "email" required/>
 </mat-form-field>
 <div *ngIf = "registrationForm.get('email').touched">
 <span *ngIf ="registrationForm.hasError('required','email')" class = "input-errors">email is required</span><br>
-<span *ngIf ="!registrationForm.hasError(null,'email')" class = "input-errors">invalid email address</span>
+<!--<span *ngIf ="!registrationForm.hasError(null,'email')" class = "input-errors">invalid email address</span>-->
 </div>
 </div>
   <div class = "formGroup">
@@ -64,7 +54,7 @@
   </div>
   </div>
 <div class = "login-button">
-<button  [disabled] = "registrationForm.status === 'INVALID' || !passwordMatch" mat-raised-button  color = "primary">register</button>
+<button  type = "submit" [disabled] = "registrationForm.status === 'INVALID' || !passwordMatch" mat-raised-button  color = "primary">register</button>
 </div>
 <div style = "margin-top:10%;font-size:0.7em;">
 <span>Not new? <label style="color:blue" (click) = "requestLogin()">Login</label></span>
