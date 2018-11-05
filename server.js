@@ -3,6 +3,7 @@ var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
 //const api = require('./server/routes/api');
+require('./server/models/db');
 const api = require('./server/routes/api');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
