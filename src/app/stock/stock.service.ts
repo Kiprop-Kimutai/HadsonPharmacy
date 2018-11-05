@@ -54,4 +54,9 @@ fetchProductCatalogue():Observable<any>{
         let httpHeaders = new HttpHeaders({'Content-Type':'application/json','auth':''});
         return this.http.post('/url',{body:product},{headers:httpHeaders});
     }
+
+    print(url:string){
+        let httpheaders = new HttpHeaders({'Content-Type':'application/json'});
+        return this.http.post(`${this.API_URL}/print/print`,{url:url},{headers:httpheaders});
+    }
 }
