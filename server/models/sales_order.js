@@ -43,5 +43,6 @@ salesOrderSchema.pre('save',function(next){
     });
 })
 
-var SalesOrder = mongoose.model('SalesOrder',salesOrderSchema);
-module.exports = SalesOrder;
+//var SalesOrder = mongoose.model('SalesOrder',salesOrderSchema);
+//module.exports = SalesOrder;
+mongoose.model('SalesOrder',salesOrderSchema);
