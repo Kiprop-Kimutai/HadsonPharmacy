@@ -15,7 +15,7 @@ var productsSchema = new Schema({
     product_code:{type:String,required:true},
     gen_name:{type:String},
     product_name:{type:String},
-    invoice_no:{type:String},
+    invoice_no:{type:String,required:true},
     supplier:{type:String},
     units:{type:Number},
     unit_quantity:{type:Number},
@@ -58,5 +58,6 @@ productsSchema.pre('save',function(next){
 
 
 //create a model from schema and export for use in other files
-var Product = mongoose.model('Product',productsSchema);
-module.exports = Product;
+//var Product = mongoose.model('Product',productsSchema);
+//module.exports = Product;
+mongoose.model('Product',productsSchema);
