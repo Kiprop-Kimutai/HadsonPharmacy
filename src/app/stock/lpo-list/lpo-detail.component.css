@@ -9,3 +9,10 @@ table,table{
     width:100%;
     font-size:0.6em;
 }
+.add-to-stock{
+    position: relative;
+    margin-left: 40vw;
+    margin-right: 40vw;
+    background-color: teal;
+    margin-top:20px;
+}
