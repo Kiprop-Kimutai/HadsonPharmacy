@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/pbu_tms",{useNewUrlParser:true});
+//mongoose.connect("mongodb://localhost:27017/pbu_tms",{useNewUrlParser:true});
 
 var Schema = mongoose.Schema;
 //create a counter schema
@@ -36,6 +36,7 @@ deviceSchema.pre('save', function(next) {
 });
 
 //create a model using the schema and make it available in our application
-var Device = mongoose.model('Device',deviceSchema);
-module.exports = Device;
+//var Device = mongoose.model('Device',deviceSchema);
+//module.exports = Device;
+mongoose.model('Device',deviceSchema);
 
