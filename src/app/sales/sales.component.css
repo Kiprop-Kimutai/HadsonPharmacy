@@ -2,13 +2,13 @@
     min-height: 100vh;
 }
 table{
-    width:105%;
+    width:100%;
 }
 tr:hover{
     background-color: rgba(243, 237, 237, 0.856);
   }
 mat-card{
-    width:100%;
+    width:105%;
     margin:5px;
 }
 
