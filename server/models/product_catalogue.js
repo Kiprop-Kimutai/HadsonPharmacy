@@ -24,7 +24,8 @@ product_catalogue_schema.pre('save',function(next,err){
     }
 })
 
-var ProductCatalogue = mongoose.model('ProductCatalogue',product_catalogue_schema);
-module.exports = ProductCatalogue;
+//var ProductCatalogue = mongoose.model('ProductCatalogue',product_catalogue_schema);
+//module.exports = ProductCatalogue;
+mongoose.model('ProductCatalogue',product_catalogue_schema);
 
 
