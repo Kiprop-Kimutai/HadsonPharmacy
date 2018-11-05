@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/pbu_tms",{useNewUrlParser:true});
+//mongoose.connect("mongodb://localhost:27017/pbu_tms",{useNewUrlParser:true});
 var Schema = mongoose.Schema;
 
 
@@ -42,6 +42,7 @@ Purchase_OrderSchema.pre('save',function(next){
     });
 })
 
-var PurchaseOrder = mongoose.model('PurchaseOrder',Purchase_OrderSchema);
-module.exports = PurchaseOrder;
+//var PurchaseOrder = mongoose.model('PurchaseOrder',Purchase_OrderSchema);
+//module.exports = PurchaseOrder;
+mongoose.model('PurchaseOrder',Purchase_OrderSchema);
 
