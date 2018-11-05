@@ -1,6 +1,9 @@
 var express = require('express');
-var PurchaseOrder = require('../models/purchase_order');
-var Product = require('../models/products');
+var mongoose = require('mongoose');
+var PurchaseOrder = mongoose.model('PurchaseOrder');
+var Product = mongoose.model('Product');
+//var PurchaseOrder = require('../models/purchase_order');
+//var Product = require('../models/products');
 var ApiResponse = require('../models/response');
 var app = express();
 
