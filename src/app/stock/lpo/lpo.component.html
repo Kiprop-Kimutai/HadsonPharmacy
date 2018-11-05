@@ -1,5 +1,5 @@
 <div class = "body">
-    <form [formGroup] = "purchaseOrderFormGroup" (ngSubmit) = "submitLPO()">
+    <form [formGroup] = "purchaseOrderFormGroup">
         <mat-card class = "header-mat-card">
             <table>
                 <tr>
@@ -19,7 +19,7 @@
                     <td>
                         <mat-form-field>
                             <mat-select formControlName = "supplier">
-                              <mat-option *ngFor="let supplier of suppliers" [value]="supplier" (blur) = "testFormValue()">
+                              <mat-option *ngFor="let supplier of suppliers" [value]="supplier" (blur) = "setSupplier(supplier)">
                                 {{supplier}}
                               </mat-option>
                             </mat-select>
@@ -103,7 +103,7 @@
               <input type = "number" formControlName = "unit_discount"/>
               <input type = "number" formControlName = "cost"/>
               <input  type = "number" formControlName = "ordering_price"/>
-              <button mat-icon-button color = "primary"><img src = "../../assets/icons/delete-small.png"/></button>
+              <button mat-icon-button color = "primary" (click) = "deleteProduct(i)"><img src = "../../assets/icons/delete-small.png"/></button>
             </div>
           </div>
         </mat-card>
