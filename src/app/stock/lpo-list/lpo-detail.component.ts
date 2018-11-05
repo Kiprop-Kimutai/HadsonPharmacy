@@ -5,6 +5,7 @@ import {PurchaseOrder} from '../../models/purchase_order';
 import {FormGroup,FormControl,FormBuilder} from '@angular/forms';
 import { Product } from '../../models/products';
 import {PageEvent,MatTableDataSource} from '@angular/material';
+import {DialogService} from '../../dialog.service';
 @Component({
     selector:'lpo-detail',
     templateUrl:'./lpo-detail.component.html',
@@ -21,7 +22,7 @@ export class LpoDetailComponent implements OnInit{
     dataLength:Number;
     columnsToDisplay:string[];
     dataSource:MatTableDataSource<Product>
-    constructor(private router:Router,private route:ActivatedRoute,private stockservice:StockService,private fb:FormBuilder){
+    constructor(private router:Router,private route:ActivatedRoute,private stockservice:StockService,private fb:FormBuilder,private dialogservice:DialogService){
         //this.lpoItem = this.fetchLPOItem();
     }
 
@@ -90,7 +91,17 @@ export class LpoDetailComponent implements OnInit{
             product.supplier = this.lpoItem.supplier;
         }
         console.log(this.lpoItem);
-        this.stockservice.saveLPO(this.lpoItem).subscribe(res =>console.log(res));
+        this.stockservice.saveLPO(this.lpoItem).subscribe((res) =>{
+            console.log(res);
+            if(res.response_code === 201){
+                this.router.navigateByUrl('/layout/stock-management/lpolist');
+            }
+        },(err)=>{
+            console.log("Error saving product");
+            this.dialogservice.alert("Error stocking product..");
+
+        }
+    );
     }
     ngOnInit(){
         this.lpoItem = this.fetchLPOItem();
