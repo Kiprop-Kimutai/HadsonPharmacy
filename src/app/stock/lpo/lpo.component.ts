@@ -139,8 +139,8 @@ export class LpoComponent implements OnInit{
     submitLPO(){
         console.log("will attempt to save LPO");
         console.log(this.purchaseOrderFormGroup.getRawValue());
-        //this.stockService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
-        this.stockService.print(`http://localhost/4200`+this.router.url).subscribe(data =>{console.log(data)});
+        this.stockService.saveLPO(this.purchaseOrderFormGroup.getRawValue()).subscribe(res =>{console.log(res)});
+        //this.stockService.print(`http://localhost/4200`+this.router.url).subscribe(data =>{console.log(data)});
     }
     getPurchaseId(){
         this.stockService.getLpoID().subscribe(data =>{console.log(data);this.purchaseOrderFormGroup.get('po_number').setValue(data.response_message)});
